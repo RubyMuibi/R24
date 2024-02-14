@@ -11,9 +11,7 @@ export default function Auth () {
   const navigate = useNavigate();
 
   useEffect( () => {
-    const id = "65b2c1554f0beeccb643f2bd"
     if (isLoggedIn) {
-      navigate(`/${id}`)
     }
   }, [isLoggedIn] )
 

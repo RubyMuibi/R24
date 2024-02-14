@@ -1,10 +1,15 @@
 import styles from "./header.module.css";
+import { UserContext } from "@contexts/UserContext";
+import { useState, useEffect, createContext, useContext } from "react";
+
+
 
 import { Link, NavLink } from "react-router-dom";
 import { Icon } from "@iconify/react";
 
 export default function Header() {
-  const route = "65b2c1554f0beeccb643f2bd"
+  const { user } = useContext(UserContext); 
+
   return (
     <>
       <header className={styles.container}>
@@ -17,11 +22,11 @@ export default function Header() {
             exact to="/"
             className={( {isActive} ) => !isActive ? styles.noStyle : styles.stylish}
           >
-            <p> RUMS </p>
+            <p> Projects </p>
           </NavLink>
 
           <NavLink
-            to={route}
+            to={user.name}
             className={( {isActive} ) => !isActive ? styles.noStyle : styles.stylish}
           >
             <p> Center </p>

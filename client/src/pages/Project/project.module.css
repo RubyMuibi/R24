@@ -13,7 +13,7 @@
     position: relative; 
 }
 
-.rumImage {
+.projectImage {
     width: 90%;
     height: 90%;
     position: absolute; 
@@ -75,10 +75,11 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid black;
-    cursor: pointer;
     text-decoration: none;
     color: black;
 }
+
+.icon{cursor: pointer;}
 
 .link:last-child {
     border-bottom: none;

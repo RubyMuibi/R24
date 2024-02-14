@@ -50,7 +50,7 @@
     position: relative; 
 }
 
-.rumImage {
+.projectImage {
     width: 90%;
     height: 90%;
     position: absolute; 
@@ -132,26 +132,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid black;
+    border-top: 1px solid black;
     cursor: pointer;
     text-decoration: none;
     color: black;
 }
 
-.link:last-child {
-    border-bottom: none;
-}
-
-.githubProfile {
-    font-size: 10px;
-    font-weight: 500;
-    text-transform: none;
-}
-
-.noStyle {
-    text-decoration: none;
-    color: black;
-}
 
 
 

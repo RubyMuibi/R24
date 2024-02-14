@@ -1,13 +1,13 @@
 import styles from "./home.module.css";
-import HomeMarquee from "../../components/HomeMarquee/HomeMarquee";
-import Rums from "../../components/Rums/Rums";
+import HomeMarquee from "@components/HomeMarquee/HomeMarquee";
+import Projects from "@components/Projects/Projects";
 
 export default function Home() {
   return (
     <>
       <main className={ styles.container } >
         <HomeMarquee />
-        <Rums/>
+        <Projects/>
       </main>
     </>
   );

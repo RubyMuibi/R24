@@ -1,18 +1,18 @@
-import styles from "./auth-context.module.css";
+import styles from "./authContext.module.css";
 
-import { useState, useEffect, createContext } from "react"
+import { useState, useEffect, createContext } from "react";
 
 import axios from "axios";
 
 export const AuthContext = createContext();
 
-
-export default function AuthContextProvider({children}) {
-  const [reload, setReload] = useState(false);  
+export default function AuthContextProvider({ children }) {
+  const [reload, setReload] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [jwt, setJwt] = useState("")
 
   const handleGithubLogin = () => {
-    const clientID = import.meta.env.VITE_CLIENT_ID
+    const clientID = import.meta.env.VITE_CLIENT_ID;
     window.location.assign(
       `https://github.com/login/oauth/authorize?client_id=${clientID}`
     );
@@ -25,16 +25,15 @@ export default function AuthContextProvider({children}) {
 
     if (githubCode) {
       const fetchAccessToken = async () => {
-        const apiURL =  `${import.meta.env.VITE_SERVER_URL}/authUser`;
-        const params = `?code=${githubCode}`;
-        const response = await axios.get(`${apiURL}${params}`);
+        const serverUrl = import.meta.env.VITE_SERVER_URL;
+        const authApiUrl = `${serverUrl}/users/auth`;
+        const response = await axios.post(authApiUrl, { code: githubCode });
         const responseData = await response.data;
-        const accessToken = await responseData.access_token
-        console.log(responseData);
-
-        localStorage.setItem("accessToken", accessToken)
-        setIsLoggedIn(true)
-
+        const r24Token = responseData 
+        
+        setJwt(responseData)
+        localStorage.setItem("r24Token", r24Token);
+        setIsLoggedIn(true);
       };
 
       fetchAccessToken();
@@ -42,34 +41,32 @@ export default function AuthContextProvider({children}) {
     }
 
     const remainLoggedIn = () => {
-      const accessToken = localStorage.getItem("accessToken");
+      const accessToken = localStorage.getItem("r24Token");
 
-      accessToken ? setIsLoggedIn(true) : setIsLoggedIn(false)
-    }
+      accessToken ? setIsLoggedIn(true) : setIsLoggedIn(false);
+    };
 
     remainLoggedIn();
-
-    console.log(githubCode);
-
   }, []);
 
-
   const handleLogout = () => {
-    localStorage.removeItem("accessToken")
-    setIsLoggedIn(false)
-  }
+    localStorage.removeItem("r24Token");
+    setIsLoggedIn(false);
+  };
 
   return (
     <>
-      <AuthContext.Provider value={{ isLoggedIn, handleLogout }}>
-      {isLoggedIn ? children : (
-        <main className={styles.container}>
-          <div className={styles.notAuth} onClick={handleGithubLogin}>
-            <h3> To continue to R24</h3>
-            <button>Log in with GitHub</button>
-          </div>
-        </main>
-      )}
+      <AuthContext.Provider value={{ isLoggedIn, handleLogout, jwt }}>
+        {isLoggedIn ? (
+          children
+        ) : (
+          <main className={styles.container}>
+            <div className={styles.notAuth} onClick={handleGithubLogin}>
+              <h3> To continue to R24</h3>
+              <button>Log in with GitHub</button>
+            </div>
+          </main>
+        )}
       </AuthContext.Provider>
     </>
   );
