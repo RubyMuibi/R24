@@ -1,6 +1,6 @@
 # R24 🌎
 
-This is a repository platform for software developers to discover, explore and share their projects (RUM).
+This is a repository and social networking platform for software developers to discover, explore, and share their projects.
 
 ## How to Use
 1. Visit https://r24.dev or clone this repository.
@@ -34,6 +34,9 @@ Here's what you need to install the software and how to install it:
 
 1. Grab your client ID and client Secret from GitHub
 2. Enter the respective variable values in the .env file under the server folder
+
+### Setting up JWT User Authentication secret key
+1. Create a secret key in .env file for JWT
 
 ## Contributing
 
