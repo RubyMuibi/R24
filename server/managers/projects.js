@@ -27,3 +27,10 @@ exports.removeAProject = async (projectId) => {
         throw new Error("deleteAProject: Error removing a project", error);
     } 
 };
+
+exports.addAnImage = async (req, es) => {
+  try {
+  } catch (error) {
+    res.status(500).send("deleteAProject: Error deleting project");
+  }
+};

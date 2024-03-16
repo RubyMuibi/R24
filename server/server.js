@@ -12,12 +12,12 @@ const usersRoutes = require("@routes/users");
 const projectsRoutes = require("@routes/projects");
 
 const app = express();
-const port = 4000;
 
 app.use(express.json());
 app.use(cors());
 
 require("dotenv").config();
+const port = process.env.PORT;
 const dbUri = process.env.MONGODB_URI;
 
 mongoose

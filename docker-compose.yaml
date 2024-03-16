@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  server:
+    container_name: r24_server
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    image: r24/server:latest
+    ports:
+      - "4000:${PORT}"
+    volumes:
+      - ./server:/app
+    env_file:
+      - ./server/.env

@@ -21,13 +21,20 @@ exports.postAProject = async (req, res) => {
   } catch (error) {
     res.status(500).send("postAProject: Error adding project");
   }
-}; 
+};
 
 exports.deleteAProject = async (req, res) => {
   try {
     const { projectId } = req.params;
     const project = await removeAProject(projectId);
     res.status(200).json(project);
+  } catch (error) {
+    res.status(500).send("deleteAProject: Error deleting project");
+  }
+};
+
+exports.postAnImage = async (req, es) => {
+  try {
   } catch (error) {
     res.status(500).send("deleteAProject: Error deleting project");
   }
